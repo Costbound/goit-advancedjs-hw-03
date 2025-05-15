@@ -8,6 +8,7 @@ import { buildGalleryHtml } from './js/render-functions';
 const form = document.querySelector('form');
 const [searchInput] = form.elements;
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
 
 iziToast.settings({
   message:
@@ -31,7 +32,7 @@ form.addEventListener('submit', async e => {
     });
     return;
   }
-  gallery.innerHTML = '<span class="loader"></span>';
+  loader.classList.remove('visually-hidden');
   fetchImages(searchInput.value.trim())
     .then(({ data: { hits: images } }) => {
       if (images.length === 0) {
@@ -54,5 +55,8 @@ form.addEventListener('submit', async e => {
         position: 'topRight',
         messageSize: '16px',
       });
+    })
+    .finally(() => {
+      loader.classList.add('visually-hidden');
     });
 });
