@@ -3,7 +3,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import fetchImages from './js/pixabay-api';
-import renderGallery from './js/render-function';
+import { buildGalleryHtml } from './js/render-functions';
 
 const form = document.querySelector('form');
 const [searchInput] = form.elements;
@@ -44,8 +44,8 @@ form.addEventListener('submit', async e => {
         gallery.innerHTML = '';
         return;
       }
-      const items = renderGallery(images);
-      gallery.innerHTML = items.join(' ');
+      const buildedGallaryHtml = buildGalleryHtml(images);
+      gallery.innerHTML = buildedGallaryHtml;
       simpleGallery.refresh();
     })
     .catch(() => {

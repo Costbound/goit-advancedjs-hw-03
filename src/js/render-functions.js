@@ -1,15 +1,16 @@
-export default function renderGallery(images) {
-  return images.map(
-    ({
-      largeImageURL,
-      webformatURL,
-      tags,
-      likes,
-      views,
-      comments,
-      downloads,
-    }) => {
-      return `<li class="gallery-item">
+export function buildGalleryHtml(images) {
+  return images
+    .map(
+      ({
+        largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+      }) => {
+        return `<li class="gallery-item">
             <div class="img-wrapper">
               <a href="${largeImageURL}">
                   <img
@@ -41,6 +42,7 @@ export default function renderGallery(images) {
               </ul>
             </div>
         </li>`;
-    }
-  );
+      }
+    )
+    .join(' ');
 }
